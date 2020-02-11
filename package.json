@@ -12,6 +12,10 @@
     "permit-params"
   ],
   "author": "Alpha",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:zgid123/permit-params-js.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^25.1.2",
