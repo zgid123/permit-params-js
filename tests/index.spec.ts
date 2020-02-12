@@ -61,7 +61,7 @@ describe('permit object param', () => {
         {
           otherData: [
             'firstCase',
-            'sixthCase',
+            'seventhCase',
           ],
         },
       ),

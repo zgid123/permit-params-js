@@ -2,7 +2,7 @@
 
 Simple package to permit parameters (from client for Node.js) to make it be strong parameters.
 
-The behavior is like RoR `ActionController::Parameters`'s behavior.
+The behavior is like [RoR `ActionController::Parameters`'s behavior](http://edgeguides.rubyonrails.org/action_controller_overview.html#strong-parameters).
 
 ## Installation
 
@@ -79,6 +79,20 @@ const strongParams = permitParams(
 );
 
 console.log(strongParams); // will give the same object params, without element 'test string' of sixthCase
+```
+
+### More example
+
+```js
+permitParams(params, 'name'); // { name: 'Alpha' }
+
+permitParams(params, { otherData: ['firstCase', 'seventhCase'] }); // { otherData: { firstCase: 'just a string' } }
+
+permitParams(params, { favoriteGames: [] }); // { favoriteGames: ['Pokémon', 'Dragon Quest', 'Grandia', 'Fire Emblem', 'Megaman'] }
+
+permitParams(params, { addresses: ['buildNumber'] }); // { addresses: [{ buildNumber: '0112' }, { buildNumber: '0113' }, { buildNumber: '0114' }] }
+
+permitParams(params, { otherData: [{ sixthCase: [{ test: [] }] }] }); // { otherData: [{ test: ['test string'] }] }
 ```
 
 ## License
