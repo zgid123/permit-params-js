@@ -9,8 +9,8 @@ interface IParams {
 
 type TSchema = (string | string[] | { [key: string]: TSchema })[];
 
-const permitParams = <T extends IParams>(params: IParams, ...schema: TSchema): T => {
-  return schema.reduce((strongParams, paramKey) => {
+const permitParams = <T extends {}>(params: IParams, ...schema: TSchema): T => {
+  return schema.reduce<T>((strongParams, paramKey) => {
     if (typeof paramKey === 'string') {
       if (!Object.prototype.hasOwnProperty.call(params, paramKey) || isObjectType(params[paramKey])) {
         return strongParams;
@@ -31,7 +31,7 @@ const permitParams = <T extends IParams>(params: IParams, ...schema: TSchema): T
 
           if (val.length && objectElements.length) {
             permittedValues = objectElements.reduce((result: IParams[], currentParamValue: IParams) => {
-              const permittedObjectValue = permitParams(currentParamValue, ...val);
+              const permittedObjectValue = permitParams<IParams>(currentParamValue, ...val);
 
               if (isEmptyObject(permittedObjectValue)) {
                 return result;

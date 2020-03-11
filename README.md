@@ -2,7 +2,7 @@
 
 Simple package to permit parameters (from client for Node.js) to make it be strong parameters.
 
-The behavior is like [RoR `ActionController::Parameters`'s behavior](http://edgeguides.rubyonrails.org/action_controller_overview.html#strong-parameters).
+The behavior is like RoR [`ActionController::Parameters`](http://edgeguides.rubyonrails.org/action_controller_overview.html#strong-parameters)'s behavior.
 
 ## Installation
 
@@ -92,29 +92,68 @@ permitParams(params, { favoriteGames: [] }); // { favoriteGames: ['Pokémon', 'D
 
 permitParams(params, { addresses: ['buildNumber'] }); // { addresses: [{ buildNumber: '0112' }, { buildNumber: '0113' }, { buildNumber: '0114' }] }
 
-permitParams(params, { otherData: [{ sixthCase: [{ test: [] }] }] }); // { otherData: [{ test: ['test string'] }] }
+permitParams(params, { otherData: [{ sixthCase: [{ test: [] }] }] }); // { otherData: { sixthCase: [{ test: ['test string'] }] } }
 ```
 
-## License
+# Cheatsheets
 
-The MIT License (MIT)
+- To permit string/number/undefined/null parameter, use a `simple string`
 
-Copyright (c) 2015 Nicholas Penree
+  ```js
+  const params = {
+    firstName: 'Alpha',
+    lastName: 'Lucifer',
+    gender: 'Male',
+  };
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+  permitParams(, 'firstName', 'lastName'); // { firstName: 'Alpha', lastName: 'Lucifer' }
+  ```
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+- To permit object parameter, use `key - value`. With key is the name of the parameter, value is array of attributes' name of the object
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+  ```js
+  const params = otherData: {
+    firstCase: 'just a string',
+    secondCase: 'a simple string',
+    thirdCase: 'do not care',
+  };
+
+  permitParams(params, { otherData: ['firstCase', 'secondCase'] }); // { otherData: { firstCase: 'just a string, secondCase: 'a simple string' } }
+  ```
+
+- To permit array parameter, use `empty array ([])`
+
+  ```js
+  const params = {
+    favoriteGames: ['Pokémon', 'Dragon Quest', 'Grandia', 'Fire Emblem', 'Megaman'],
+  };
+
+  permitParams(params, { favoriteGames: [] }); // { favoriteGames: ['Pokémon', 'Dragon Quest', 'Grandia', 'Fire Emblem', 'Megaman'] }
+  ```
+
+- To permit array of object parameter, use `key - value`. With key is the name of the parameter, value is array of attributes' name of the object
+
+  ```js
+  const params = {
+    addresses: [
+      {
+        buildNumber: '0112',
+        streetName: 'King Abdulaziz Road',
+        city: 'Riyadh',
+        postalCode: '12643',
+      },
+      {
+        buildNumber: '0113',
+        streetName: 'King Abdulaziz Road',
+        postalCode: '12643',
+      },
+      {
+        buildNumber: '0114',
+        city: 'Riyadh',
+        postalCode: '12643',
+      },
+    ],
+  }
+
+  permitParams(params, { addresses: ['buildNumber'] }); // { addresses: [{ buildNumber: '0112' }, { buildNumber: '0113' }, { buildNumber: '0114' }] }
+  ```

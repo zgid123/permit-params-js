@@ -1,5 +1,6 @@
 export const params = {
   name: 'Alpha',
+  gender: 'Male',
   addresses: [
     {
       buildNumber: '0112',

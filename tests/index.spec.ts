@@ -7,6 +7,7 @@ test('permit full schema', () => {
     permitParams(
       params,
       'name',
+      'gender',
       {
         favoriteGames: [],
         addresses: ['buildNumber', 'streetName', 'city', 'postalCode'],
@@ -37,8 +38,9 @@ describe('permit non-object/non-array param', () => {
       permitParams(
         params,
         'name',
+        'gender',
       ),
-    ).toEqual({ name: params.name });
+    ).toEqual({ name: params.name, gender: params.gender });
   });
 
   test('with invalid schema', () => {
