@@ -9,7 +9,7 @@ interface IParams {
 
 type TSchema = (string | string[] | { [key: string]: TSchema })[];
 
-const permitParams = <T extends {}>(params: IParams, ...schema: TSchema): T => {
+const permitParams = <T extends unknown>(params: IParams, ...schema: TSchema): T => {
   return schema.reduce<T>((strongParams, paramKey) => {
     if (typeof paramKey === 'string') {
       if (!Object.prototype.hasOwnProperty.call(params, paramKey) || isObjectType(params[paramKey])) {

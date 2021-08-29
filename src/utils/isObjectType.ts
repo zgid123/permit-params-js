@@ -1,4 +1,4 @@
-const isObjectType = (value: any) => { // eslint-disable-line
+const isObjectType = (value: unknown): boolean => {
   return !!value && typeof value === 'object';
 };
 
