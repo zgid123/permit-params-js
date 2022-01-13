@@ -29,6 +29,14 @@ interface IResultProps {
   }
 }
 
+interface IDataProps {
+  name: string;
+}
+
+const data: IDataProps = {
+  name: 'test',
+};
+
 const testResult = permitParams<IResultProps>(
   params,
   'name',
@@ -48,6 +56,9 @@ const testResult = permitParams<IResultProps>(
     ],
   },
 );
+
+permitParams<IDataProps>(data, 'name');
+permitParams<IDataProps>({ a: {} }, 'test');
 
 console.log(testResult.name);
 console.log(testResult.gender);

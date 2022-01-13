@@ -8,6 +8,7 @@
     "baseUrl": "./src",
     "declaration": true,
     "module": "commonjs",
+    "importHelpers": true,
     "strictNullChecks": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
@@ -15,7 +16,8 @@
     "strictFunctionTypes": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "strictPropertyInitialization": true
+    "strictPropertyInitialization": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "src/**/*"

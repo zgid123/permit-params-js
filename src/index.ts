@@ -1,10 +1,8 @@
 import isObjectType from './utils/isObjectType';
 import isEmptyObject from './utils/isEmptyObject';
 
-type TParams = string | boolean | number | null | undefined;
-
 interface IParams {
-  [key: string]: IParams | TParams | (IParams | TParams)[];
+  [key: string]: any; // to support all interfaces
 }
 
 type TSchema = (string | string[] | { [key: string]: TSchema })[];
